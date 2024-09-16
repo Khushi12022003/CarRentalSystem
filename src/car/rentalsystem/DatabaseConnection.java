@@ -7,29 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-	
-	//Resuablitly, Portablity 
 
-	static Connection Get(String url, String port, String dbName, String dbUserName, String dbPswd) {
-		Connection con = null;
-		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null;
-
-		try {
-
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("Driver load");
-		} catch (ClassNotFoundException e) {
-			System.out.println(e);
-		}
-		try {
-			con = DriverManager.getConnection("jdbc:mysql://" + url + ":" + port + "/" + dbName, dbUserName, dbPswd);
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
-
-		return con;
-	}
 
 	static void databaseConnection() {
 
@@ -42,10 +20,14 @@ public class DatabaseConnection {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			System.out.println("Driver load");
 		} catch (ClassNotFoundException e) {
-			System.out.println(e);
+			System.o444ut.println(e);
 		}
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/login", "root", "");
+			String url = "jdbc:mysql://10.0.0.17/login?useSSL=false&allowPublicKeyRetrieval=true";
+			String username = "root";
+		    String password = "Password@321";
+//			con = DriverManager.getConnection("jdbc:mysql://10.0.0.17:3306/login", "root", "Password@321");
+			con = DriverManager.getConnection(url, username, password);
 			System.out.println("Connection Done....");
 			String sql = "select * from users";
 			preparedStatement = con.prepareStatement(sql);
